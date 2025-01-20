@@ -1,0 +1,114 @@
+### ** Congestion Control Algorithms**
+Congestion control algorithms manage network traffic to prevent and alleviate congestion, which occurs when the data load exceeds the network's capacity. These algorithms are categorized into two types: **open loop** and **closed loop**.
+### **1. Open Loop Algorithms**
+- Focus on **preventing congestion** through good system design.
+- Do not adjust once the system is running.
+- Divided into:
+  - **Source-based**: Control mechanisms at the source.
+  - **Destination-based**: Control mechanisms at the destination.
+- Example: **Traffic shaping**, which ensures a predictable data transmission rate, reducing bursts and smoothing traffic flow.
+
+### **2. Closed Loop Algorithms**
+
+- Detect and correct congestion using a **feedback loop**.
+- Divided into:
+  - **Explicit feedback**: Congestion is directly communicated back to the source.
+  - **Implicit feedback**: The source infers congestion through local observations (e.g., delays in acknowledgments).
+
+### **Leaky Bucket Algorithm**
+
+- An **open loop traffic shaping method** used to manage congestion.
+- Each host has a **leaky bucket** (a finite queue).
+- Packets are added to the bucket and transmitted at a fixed rate:
+  - **Excess packets are dropped** if the bucket is full.
+  - The mechanism smooths bursty traffic into a steady flow, reducing congestion risk.
+- Can be implemented in hardware or software.
+
+Algorithm:
+1. Start
+2. Set the bucket size or the buffer size.
+3. Set the output rate.
+4. Transmit the packets such that there is no overflow.
+5. Repeat the process of transmission until all packets are transmitted. (Reject packets where its
+size is greater than the bucket size)
+6. Stop
+
+### **Key Benefits**
+- Smoothens packet flow and prevents bursts.
+- Reduces congestion and improves network stability.
+- Simple and efficient for traffic regulation.
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+void leaky_bucket(int incoming[], int n, int bucket_size, int leak_rate) {
+ int bucket_content = 0;
+
+ printf("\nTime\tIncoming\tBucket\t\tTransmitted\tDropped\n");
+ for (int i = 0; i < n; i++) {
+ printf("%d\t%d\t\t", i + 1, incoming[i]);
+
+ // Add incoming packets to bucket
+ if (incoming[i] + bucket_content > bucket_size) {
+ printf("%d (Overflow!)\t", bucket_size);
+ printf("%d\t\t%d\n", leak_rate, incoming[i] + bucket_content - bucket_size);
+ bucket_content = bucket_size;
+ } else {
+ bucket_content += incoming[i];
+ printf("%d\t\t", bucket_content);
+
+ // Transmit packets
+ if (bucket_content >= leak_rate) {
+ printf("%d\t\t0\n", leak_rate);
+ bucket_content -= leak_rate;
+ } else {
+ printf("%d\t\t0\n", bucket_content);
+ bucket_content = 0;
+ }
+ }
+ }
+}
+int main() {
+ int bucket_size, leak_rate, n;
+ printf("Enter bucket size: ");
+ scanf("%d", &bucket_size);
+ printf("Enter leak rate: ");
+ scanf("%d", &leak_rate);
+ printf("Enter the number of time intervals: ");
+ scanf("%d", &n);
+ int incoming[n];
+ printf("Enter the incoming packets for each interval:\n");
+ for (int i = 0; i < n; i++) {
+ printf("Interval %d: ", i + 1);
+ scanf("%d", &incoming[i]);
+ }
+ leaky_bucket(incoming, n, bucket_size, leak_rate);
+ return 0;
+}
+Steps to Execute in Ubuntu
+1. Install GCC Compiler (if not installed):
+sudo apt update
+sudo apt install build-essential
+2. Create a File for the Program: Save the above code in a file named leaky_bucket.c. (filename.c)
+3. Compile the Program: Open a terminal and navigate to the folder containing the file. 
+Then, run:
+gcc leaky_bucket.c -o leaky_bucket (gcc <filename.c> –o <filename>)
+4. Execute the program with: ./leaky_bucket
+Input Values to be entered During Execution:
+• Enter the bucket size.
+• Enter the leak rate (transmission rate).
+• Specify the number of intervals.
+• Enter the incoming packet sizes for each interval.
+the program will display how packets are added, transmitted, and dropped during each
+interval.
+OUTPUT 1..
+Enter bucket size: 5
+Enter leak rate: 3
+Enter the number of time intervals: 2
+Enter the incoming packets for each interval:
+Interval 1: 10
+Interval 2: 5
+Time Incoming Bucket Transmitted Dropped
+1 10 5 (Overflow!) 3 5
+2 5 5 (Overflow!) 3 5
+3 5
+5 3 10 3 0
