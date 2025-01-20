@@ -97,3 +97,77 @@ o Append the CRC to the data as a checksum before transmission.
 o Recalculate the CRC for the received data (including the appended CRC).
 o If the calculated CRC is zero, the data is considered error-free. Otherwise, an
 error is detected.
+
+
+
+
+
+
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#define POLYNOMIAL 0x1021 // CRC-CCITT polynomial
+#define WIDTH 16 // CRC width
+#define TOPBIT (1 << (WIDTH - 1))
+// Function to calculate CRC-CCITT (16-bit)
+uint16_t crc_ccitt(const uint8_t *data, size_t length)
+{
+ uint16_t crc = 0xFFFF; // Initial CRC value
+ for (size_t i = 0; i < length; i++)
+{
+ crc ^= (data[i] << 8); // Load byte into the top 8 bits
+ for (uint8_t bit = 0; bit < 8; bit++)
+{
+ if (crc & TOPBIT)
+{
+ crc = (crc << 1) ^ POLYNOMIAL;
+ } else
+{
+ crc = crc << 1;
+ }
+ }
+ }
+ return crc;
+}
+void print_binary(uint16_t value) // Print binary representation of a 16-bit value
+{
+ for (int i = WIDTH - 1; i >= 0; i--)
+{
+ printf("%d", (value >> i) & 1);
+ }
+ printf("\n");
+}
+int main() {
+ char input[256];
+ printf("Enter the data to send: "); // Sender side
+ fgets(input, sizeof(input), stdin);
+ size_t length = strlen(input);
+ if (input[length - 1] == '\n') // Remove trailing newline if present
+{ input[length - 1] = '\0';
+ length--;
+ }
+ uint16_t crc = crc_ccitt((uint8_t *)input, length);
+ printf("Original Data: %s\n", input);
+ printf("CRC-CCITT (16-bit) Checksum: 0x%04X\n", crc);
+ // Simulating transmission by appending the CRC to the data
+ printf("\n--- Simulating Data Transmission ---\n");
+ printf("Transmitted Data: %s\n", input);
+ printf("Transmitted CRC: 0x%04X\n", crc);
+ // Receiver side
+ printf("\n--- Simulating Receiver Verification ---\n");
+ char received[256];
+ strcpy(received, input); // Simulate received data (same as transmitted)
+ uint16_t received_crc = crc;
+ // Recalculate CRC for received data
+ uint16_t recalculated_crc = crc_ccitt((uint8_t *)received, length);
+ // Combine data and transmitted CRC to check validity
+ uint16_t verification_crc = crc_ccitt((uint8_t *)received, length + 2);
+ printf("Recalculated CRC for Data: 0x%04X\n", recalculated_crc);
+ printf("Verification CRC (Data + Transmitted CRC): 0x%04X\n", verification_crc);
+ if (verification_crc == 0) {
+ printf("No errors detected: Data is valid.\n");
+ } else {
+ printf("Error detected: Data is corrupted.\n");
+ }
+ return 0;
+}
