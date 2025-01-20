@@ -1,0 +1,78 @@
+Network Devices: Network devices, also known as networking hardware, are physical devices that
+allow hardware on a computer network to communicate and interact with one another.
+For example Repeater, Hub, Bridge, Switch, Routers,
+### **1. Repeaters**
+Repeaters are physical layer devices in the OSI model designed to amplify or regenerate signals to extend a network's coverage. Types include:
+- **Analog Repeaters:** Amplify analog signals.
+- **Digital Repeaters:** Reconstruct distorted signals.
+- **Wired Repeaters:** Used in LANs.
+- **Wireless Repeaters:** Used in wireless networks.
+
+**Advantages:**
+- Cost-effective and easy to install.
+- Extends network coverage.
+- Can connect using different cables.
+
+**Disadvantages:**
+- Cannot connect dissimilar networks.
+- Does not filter out noise.
+- Limited deployment capacity.
+
+---
+
+### **2. Hubs**
+A hub is a physical layer device that connects multiple devices in a LAN. Types include:
+- **Passive Hubs:** Act as simple connectors.
+- **Active Hubs:** Function as repeaters with added functionality.
+- **Intelligent Hubs:** Provide advanced management and switching features.
+
+---
+
+### **3. Bridges**
+Bridges operate at both the physical and data link layers. They filter frames based on MAC addresses and decide whether to forward or drop them.  
+Types:
+- **Transparent Bridges:** Do not require reconfiguration upon addition or removal.
+- **Source Routing Bridges:** Source station specifies the route for data.
+
+---
+
+### **4. Routers**
+Routers work at the network layer and forward data packets based on their logical addresses. They are equipped with dynamic routing tables and support host-to-host communication.  
+Types:
+- **Wireless Routers:** Provide Wi-Fi and Ethernet connections.
+- **Broadband Routers:** Offer internet access and VoIP technology.
+- **Core Routers:** Link devices within a network.
+- **Edge Routers:** Connect internal to external networks.
+
+---
+
+### **5. Gateways**
+Gateways serve as a passage between different networks, functioning across any OSI layer. They handle protocol conversions and manage routing paths.  
+Types:
+- **Network Gateways:** Interface between two dissimilar networks.
+- **Cloud Storage Gateways:** Translate storage requests to cloud services.
+- **IoT Gateways:** Connect IoT devices to networks.
+- **VoIP Trunk Gateways:** Link traditional telephony with VoIP.
+
+---
+
+### **6. Switches**
+Switches are data link layer devices that connect devices within a network and direct data based on MAC addresses.  
+Types:
+- **Unmanaged Switches:** Plug-and-play devices for home networks.
+- **Managed Switches:** Customizable for large networks, offering advanced features.
+- **LAN Switches:** Reduce network congestion.
+- **PoE Switches:** Combine power and data transmission.
+
+---
+
+### **7. Modems**
+Modems are devices that convert digital signals into analog for transmission over mediums like telephone lines.  
+Types:
+- **Simplex Modem:** One-way data transmission.
+- **Half-Duplex Modem:** Two-way data, but one direction at a time.
+- **Full-Duplex Modem:** Simultaneous two-way data transmission.
+
+---
+
+The document concludes with the results of studying the functions, types, and applications of these devices in networking setups.
