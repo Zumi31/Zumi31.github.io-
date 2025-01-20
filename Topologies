@@ -1,0 +1,77 @@
+Cisco Packet Tracer is a network simulation tool for practicing simple and complex networks. It offers two workspaces:
+
+- **Logical Workspace:** Shows the logical layout of a network, including connections between virtual devices.
+- **Physical Workspace:** Provides a graphical representation of physical networks, showcasing layouts and connections in real environments.
+
+---
+
+### Network Topologies&#x20;
+
+### TOPOLOGY: The arrangement of a network that comprises nodes and connecting lines via sender and receiver
+
+#### 1. **Bus Topology**
+
+- **Description:** All devices connect to a single central cable (backbone). Data flows in one direction.
+- **Advantages:**
+  - Minimal cabling is needed.
+  - Cost-effective for small networks.
+- **Disadvantages:**
+  - If the backbone fails, the entire network crashes.
+  - High network traffic increases collisions.
+- **Steps to Simulate:**
+  - Use four devices (PCs) and switches.
+  - Connect devices with copper crossover cables.
+  - Assign IP addresses and test data transfer.
+
+---
+
+#### 2. **Star Topology**
+
+- **Description:** Devices connect to a central hub. The hub acts as the central point for communication.
+- **Advantages:**
+  - Simple to set up and expand.
+  - Minimal ports required on each device.
+- **Disadvantages:**
+  - Failure of the hub affects the entire network.
+  - Installation is costly.
+- **Steps to Simulate:**
+  - Use four devices and one switch.
+  - Connect devices to the switch.
+  - Assign IP addresses and verify connections.
+
+---
+
+#### 3. **Mesh Topology**
+
+- **Description:** Every device connects to every other device through dedicated links.
+- **Advantages:**
+  - Robust and secure.
+  - Easy to identify and fix faults.
+- **Disadvantages:**
+  - Expensive due to extensive cabling.
+  - Installation and maintenance are challenging.
+- **Steps to Simulate:**
+  - Connect all devices using multiple links.
+  - Assign IPs to all devices and test communication.
+
+---
+
+#### 4. **Ring Topology**
+
+- **Description:** Devices form a ring, with each device connecting to two neighbors.
+- **Advantages:**
+  - Minimal collisions.
+  - Inexpensive to install.
+- **Disadvantages:**
+  - Troubleshooting is complex.
+  - Adding or removing devices disturbs the network.
+- **Steps to Simulate:**
+  - Connect devices in a circular layout using copper crossover cables.
+  - Assign IP addresses and test data transfer.
+
+---
+
+### Result
+
+The manual concludes that simulating network topologies like bus, star, mesh, and ring using Packet Tracer is successfully achieved.
+
